@@ -111,12 +111,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onPause(){
-            MainActivity.super.onPause();
-            mRecognizer.destroy();
-        }
-
-        @Override
         public void onResults(Bundle results) {
             // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줍니다.
             ArrayList<String> matches =
