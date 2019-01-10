@@ -9,7 +9,9 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
     SpeechRecognizer mRecognizer;
-    Button sttBtn;
+    ImageButton sttBtn;
     TextView textView;
     final int PERMISSION = 1;
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         if ( Build.VERSION.SDK_INT >= 23 ){
             // 퍼미션 체크
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET,
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textView = (TextView)findViewById(R.id.sttResult);
-        sttBtn = (Button) findViewById(R.id.sttStart);
+        sttBtn = (ImageButton) findViewById(R.id.sttStart);
 
         intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
@@ -103,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Toast.makeText(getApplicationContext(), "에러가 발생하였습니다. : " + message,Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPause(){
+            MainActivity.super.onPause();
+            mRecognizer.destroy();
         }
 
         @Override

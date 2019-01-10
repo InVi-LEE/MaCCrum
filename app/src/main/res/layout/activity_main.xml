@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <TextView
         android:id="@+id/sttResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="음성인식 결과가 여기에 표시됩니다." />
-    <Button
-        android:id="@+id/sttStart"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/nanum_barun_gothic_font"
+        android:text="@string/speech_prompt"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="음성인식 시작" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+
+
+        <ImageButton
+            android:id="@+id/sttStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/tap_on_mic"
+            android:src="@drawable/ico_mic" />
+    </LinearLayout>
+</RelativeLayout>
