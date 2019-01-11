@@ -15,11 +15,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.Cancellable;
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieComposition;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Intent intent;
     SpeechRecognizer mRecognizer;
     ImageButton sttBtn;
     TextView textView;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(this,SplashActivity.class);
+        startActivity(intent);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -45,11 +50,14 @@ public class MainActivity extends AppCompatActivity {
         intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+        Intent finalIntent = intent;
         sttBtn.setOnClickListener(v ->{
             mRecognizer=SpeechRecognizer.createSpeechRecognizer(this);
             mRecognizer.setRecognitionListener(listener);
-            mRecognizer.startListening(intent);
+            mRecognizer.startListening(finalIntent);
         });
+
+
     }
 
     private RecognitionListener listener = new RecognitionListener() {
@@ -127,5 +135,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onEvent(int eventType, Bundle params) {}
     };
+
 }
 
