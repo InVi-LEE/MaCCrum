@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textView = (TextView)findViewById(R.id.sttResult);
 
-        intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
-        intent.putExtra("android.speech.extra.DICTATION_MODE", true);
-        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+//        intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
+//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+//        intent.putExtra("android.speech.extra.DICTATION_MODE", true);
+//        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
         start = findViewById(R.id.start);
         start.setOnClickListener(this);
 
