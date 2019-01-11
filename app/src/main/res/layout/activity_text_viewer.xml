@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TextViewer">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="144dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nanum_barun_gothic_bold"
+        android:text="TextView"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="wrap_content"
+        android:layout_height="481dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="1dp"
+        android:layout_toLeftOf="@id/right"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/processButton"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:scaleX="-1"
+        app:srcCompat="@drawable/ico_process" />
+
+    <ImageButton
+        android:id="@+id/right"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="3dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:contentDescription="@string/tap_on_mic"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ico_direction_right" />
+
+    <RelativeLayout
+        android:id="@+id/relativeview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="489dp"
+        android:layout_below="@+id/right"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-259dp"
+        android:background="@color/gray">
+
+        <EditText
+            android:id="@+id/editview1"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="21dp"
+            android:text="완료" />
+    </RelativeLayout>
+
+</RelativeLayout>

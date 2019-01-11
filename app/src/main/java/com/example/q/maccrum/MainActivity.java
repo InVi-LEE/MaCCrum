@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -26,6 +27,7 @@ import com.vikramezhil.droidspeech.DroidSpeech;
 import com.vikramezhil.droidspeech.OnDSListener;
 import com.vikramezhil.droidspeech.OnDSPermissionsListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,18 +41,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final int PERMISSION = 1;
     ImageButton start;
     ImageButton stop;
+    ImageButton go_right;
     static boolean first;
+    static int num;
+    ArrayList<String> text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this,SplashActivity.class);
-        startActivity(intent);
+
+        first = true;
+        num = 0;
+        Intent i = getIntent();
+        num = i.getIntExtra("num",0);
+        text = (ArrayList<String>)i.getSerializableExtra("text");
+        boolean from = i.getBooleanExtra("from",false);
+        if(text == null){
+            text  = new ArrayList<>();
+        }
+        if(!from){
+            Intent intent = new Intent(this,SplashActivity.class);
+            startActivity(intent);
+        }
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        first = true;
+
         // Initialize Droid Speech
         mDroidSpeech = new DroidSpeech(this, null);
         mDroidSpeech.setOnDroidSpeechListener(this);
@@ -74,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         stop = findViewById(R.id.stop);
         stop.setOnClickListener(this);
+        go_right = findViewById(R.id.right);
+        go_right.setOnClickListener(this);
+
     }
 
 
@@ -102,11 +123,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 start.setVisibility(View.VISIBLE);
 
                 break;
+            case R.id.right:
+
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+
+                        /* Create an intent that will start the main activity. */
+                        Intent mainIntent = new Intent(MainActivity.this,
+                                TextViewer.class);
+                        Log.d(">>>>>>",textView.getText().toString());
+                        text.add(new String(textView.getText().toString()));
+                        mainIntent.putExtra("text",text);
+                        mainIntent.putExtra("num", num+1);
+
+                        //SplashScreen.this.startActivity(mainIntent);
+                        startActivity(mainIntent);
+                        /* Finish splash activity so user cant go back to it. */
+//                        MainActivity.this.finish();
+//
+//                     /* Apply our splash exit (fade out) and main
+//                        entry (fade in) animation transitions. */
+                        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+                    }
+                }, 100);
         }
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fadein_left, R.anim.fadeout_left);
+    }
 
 
     @Override
@@ -170,10 +218,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         // Setting the final speech result
         if(first){
-            this.textView.setText(finalSpeechResult + "\n");
+            this.textView.setText(finalSpeechResult + " ");
             first = false;
         }else{
-            this.textView.append(finalSpeechResult+"\n");
+            this.textView.append(finalSpeechResult+" ");
         }
 
         if(mDroidSpeech.getContinuousSpeechRecognition())
