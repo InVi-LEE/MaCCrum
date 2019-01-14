@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+
 import java.util.ArrayList;
 
 public class TextViewer extends AppCompatActivity {
@@ -179,12 +180,22 @@ public class TextViewer extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ShareDialog.canShow(ShareLinkContent.class)){
-                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentUrl(Uri.parse("www.google.com"))
-                            .build();
-                    shareDialog.show(linkContent);
-                }
+                Thread thread = new Thread(new Runnable(){
+                    @Override
+                    public void run(){
+                        //code to do the HTTP request
+                        GetKeyPhrases.start();
+
+                    }
+                });
+                thread.start();
+                // 공유 기능 부분.
+//                if(ShareDialog.canShow(ShareLinkContent.class)){
+//                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                            .setContentUrl(Uri.parse("www.google.com"))
+//                            .build();
+//                    shareDialog.show(linkContent);
+//                }
             }
         });
 
