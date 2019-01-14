@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static boolean first;
     static int num;
     ArrayList<String> text;
+    ArrayList<String> limittext;
 
     static boolean isFirst;
 
@@ -216,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i = getIntent();
         num = i.getIntExtra("num", 0);
         text = (ArrayList<String>) i.getSerializableExtra("text");
+        limittext = (ArrayList<String>) i.getSerializableExtra("limittext");
         boolean from = i.getBooleanExtra("from", false);
         if (text == null) {
             text = new ArrayList<>();
