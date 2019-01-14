@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     tools:context=".TextViewer">
 
 
@@ -20,6 +21,7 @@
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:typeface="normal" />
 
     <ListView
@@ -37,7 +39,7 @@
         android:visibility="visible" />
 
     <ImageButton
-        android:id="@+id/processButton"
+        android:id="@+id/ProcessButton"
         android:layout_width="35dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
@@ -46,11 +48,9 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="fitXY"
-        android:scaleX="-1"
-        app:srcCompat="@drawable/ico_process" />
+        app:srcCompat="@drawable/process_ico" />
 
     <ImageButton
         android:id="@+id/right"

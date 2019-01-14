@@ -1,6 +1,8 @@
 package com.example.q.maccrum;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
 import java.util.ArrayList;
 
 public class TextViewer extends AppCompatActivity {
@@ -26,11 +31,12 @@ public class TextViewer extends AppCompatActivity {
     static int num;
     ListView listview;
     EditText editView;
-    Button submit;
+    private ImageButton submit;
     int text_position;
     RelativeLayout relative;
     static ArrayAdapter<String> adapter;
     TextView numberShow;
+    private ShareDialog shareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +59,6 @@ public class TextViewer extends AppCompatActivity {
 
         editView = findViewById(R.id.editview1);
         relative = findViewById(R.id.relativeview);
-        submit = findViewById(R.id.button);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String string = editView.getText().toString();
-                text.set(text_position,string);
-                limittext.set(text_position,string.split("\n")[0]);
-                listview.setVisibility(View.VISIBLE);
-                relative.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
-            }
-        });
 
         listview = (ListView)findViewById(R.id.listview1);
         adapter = new ArrayAdapter<String>(
@@ -89,7 +83,6 @@ public class TextViewer extends AppCompatActivity {
                 String selected_item = (String)text.get(position);
 
                 editView.setText(selected_item);
-
                 // 10. 어댑터 객체에 변경 내용을 반영시켜줘야 에러가 발생하지 않습니다.
                 listview.setVisibility(View.GONE);
                 relative.setVisibility(View.VISIBLE);
@@ -136,17 +129,19 @@ public class TextViewer extends AppCompatActivity {
             }
         });
 
-        ImageButton process = findViewById(R.id.processButton);
-        process.setOnClickListener(new View.OnClickListener() {
+        submit = (ImageButton) findViewById(R.id.ProcessButton);
+        shareDialog = new ShareDialog(this);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"submit하는 부분 구현하자", Toast.LENGTH_SHORT).show();
-                // TODO: 2019-01-11 text 처리해서 단어 요약하는 부분 가져오자.
+                if(ShareDialog.canShow(ShareLinkContent.class)){
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentUrl(Uri.parse("www.google.com"))
+                            .build();
+                    shareDialog.show(linkContent);
+                }
             }
         });
-
-
-
 
     }
 
