@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class SummaryActivity extends AppCompatActivity {
     private ShareDialog shareDialog;
     private ImageButton submit;
+    private EditText editText;
 
     ArrayList<String> text;
 
@@ -41,8 +43,6 @@ public class SummaryActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-
-
 
         Intent i = getIntent();
         text = (ArrayList<String>)i.getSerializableExtra("text");

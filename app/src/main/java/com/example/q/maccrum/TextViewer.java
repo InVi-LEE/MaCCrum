@@ -41,7 +41,7 @@ public class TextViewer extends AppCompatActivity {
     TextView numberShow;
     private ShareDialog shareDialog;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
