@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private String lastText;
+
     private void startVoiceRecorder() {
         if (mVoiceRecorder != null) {
             mVoiceRecorder.stop();
@@ -175,18 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         textView.setText(text+" ");
                                         isFirst = false;
                                     }else{
-                                        String str = textView.getText().toString();
-                                        str += text+" ";
-                                        textView.setText(str);
+                                        textView.setText(lastText + " " + text+" ");
                                     }
+                                    lastText = textView.getText().toString();
                                 } else {
-//                                    if(isFirst){
-//                                        textView.setText(text);
-//                                        isFirst = false;
-//                                    }
-//                                    String str = textView.getText().toString();
-//                                    str += text;
-//                                    textView.setText(str);
+                                    textView.setText(lastText + " " + text+" ");
                                 }
                             }
                         });
@@ -295,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.stop:
 
                 // Closing droid speech
-                mDroidSpeech.closeDroidSpeechOperations();
+//                mDroidSpeech.closeDroidSpeechOperations();
 
                 stop.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
