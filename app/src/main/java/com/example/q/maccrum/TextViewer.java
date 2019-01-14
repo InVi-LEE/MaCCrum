@@ -39,17 +39,23 @@ public class TextViewer extends AppCompatActivity {
 
         Intent i = getIntent();
         text = (ArrayList<String>) i.getSerializableExtra("text");
+        limittext = (ArrayList<String>) i.getSerializableExtra("limittext");
         String str = i.getStringExtra("str");
         if(text==null){
              text = new ArrayList<>();
         }
+        if(limittext==null){
+            limittext = new ArrayList<>();
+        }
         if(str!=null){
             text.add(str);
+            if(str.length()>23){
+                limittext.add(str.substring(0,23)+"...");
+            }else{
+                limittext.add(str);
+            }
         }
-        limittext = new ArrayList<>();
-        for(int j=0;j<text.size();j++){
-            limittext.add(text.get(j).split("\n")[0]);
-        }
+
         num = i.getIntExtra("num",0);
         num++;
         Log.d("tag", text.toString());
@@ -64,7 +70,8 @@ public class TextViewer extends AppCompatActivity {
             public void onClick(View v) {
                 String string = editView.getText().toString();
                 text.set(text_position,string);
-                limittext.set(text_position,string.split("\n")[0]);
+                if(string.length()>23)
+                    limittext.set(text_position,string.substring(0,23)+"...");
                 listview.setVisibility(View.VISIBLE);
                 relative.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
@@ -125,6 +132,7 @@ public class TextViewer extends AppCompatActivity {
                                 MainActivity.class);
                         mainIntent.putExtra("text",text);
                         mainIntent.putExtra("num", num);
+                        mainIntent.putExtra("limittext",limittext);
                         mainIntent.putExtra("from",true);
 
                         //SplashScreen.this.startActivity(mainIntent);
@@ -159,6 +167,7 @@ public class TextViewer extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         text.remove(text.size()-1);
+        limittext.remove(limittext.size()-1);
         num--;
         overridePendingTransition(R.anim.fadein_left, R.anim.fadeout_left);
     }
