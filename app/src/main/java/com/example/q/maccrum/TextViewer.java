@@ -22,13 +22,14 @@ import android.widget.Toast;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+
 import java.util.ArrayList;
 
 public class TextViewer extends AppCompatActivity {
     ArrayList<String> text;
     ArrayList<String> limittext;
     ImageButton right;
-
+    private ImageButton submit;
     Button complete;
     static int num;
     ListView listview;
@@ -38,6 +39,7 @@ public class TextViewer extends AppCompatActivity {
     RelativeLayout relative;
     static ArrayAdapter<String> adapter;
     TextView numberShow;
+    private ShareDialog shareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +175,32 @@ public class TextViewer extends AppCompatActivity {
 
             }
         });
+
+        submit = (ImageButton) findViewById(R.id.ProcessButton);
+        shareDialog = new ShareDialog(this);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* Create an intent that will start the main activity. */
+                Intent mainIntent = new Intent(TextViewer.this,
+                        SummaryActivity.class);
+                mainIntent.putExtra("text",text);
+                mainIntent.putExtra("num", num);
+
+                //SplashScreen.this.startActivity(mainIntent);
+                startActivity(mainIntent);
+                // 공유 기능 부분.
+//                if(ShareDialog.canShow(ShareLinkContent.class)){
+//                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                            .setContentUrl(Uri.parse("www.google.com"))
+//                            .build();
+//                    shareDialog.show(linkContent);
+//                }
+            }
+        });
+
+
+
 
     }
 

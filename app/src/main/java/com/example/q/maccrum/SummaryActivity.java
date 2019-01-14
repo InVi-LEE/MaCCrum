@@ -2,6 +2,7 @@ package com.example.q.maccrum;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +12,14 @@ import android.widget.ImageButton;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class SummaryActivity extends AppCompatActivity {
     private ShareDialog shareDialog;
     private ImageButton submit;
+
+    ArrayList<String> text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,13 @@ public class SummaryActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-    }
 
+        Intent i = getIntent();
+        text = (ArrayList<String>)i.getSerializableExtra("text");
+        if(text==null){
+            text = new ArrayList<>();
+        }
+        HttpRequest httprequest = new HttpRequest();
+        httprequest.execute(text);
+    }
 }
