@@ -177,19 +177,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (isFinal) {
+                                if(text!=null){
+                                    if (isFinal) {
 //                                    String str = textView.getText().toString();
 //                                    str += " ";
 //                                    textView.setText(str);
-                                    if(isFirst){
-                                        textView.setText(text+" ");
-                                        isFirst = false;
-                                    }else{
+                                        if(isFirst){
+                                            textView.setText(text.replace("null","")+" ");
+                                            isFirst = false;
+                                        }else{
+                                            textView.setText(lastText + " " + text+" ");
+                                        }
+                                        lastText = textView.getText().toString();
+                                    } else {
                                         textView.setText(lastText + " " + text+" ");
                                     }
-                                    lastText = textView.getText().toString();
-                                } else {
-                                    textView.setText(lastText + " " + text+" ");
                                 }
                             }
                         });
@@ -269,17 +271,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Prepare Cloud Speech API
         bindService(new Intent(this, SpeechService.class), mServiceConnection, BIND_AUTO_CREATE);
 //        isFirst = true;
-        // Start listening to voices
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED) {
-            startVoiceRecorder();
-        } else if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.RECORD_AUDIO)) {
-            showPermissionMessageDialog();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
-                    REQUEST_RECORD_AUDIO_PERMISSION);
-        }
+
+
     }
 
     @Override
@@ -296,6 +289,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 start.setVisibility(View.GONE);
                 stop.setVisibility(View.VISIBLE);
 
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    startVoiceRecorder();
+                } else if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.RECORD_AUDIO)) {
+                    showPermissionMessageDialog();
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+                            REQUEST_RECORD_AUDIO_PERMISSION);
+                }
+
                 break;
 
             case R.id.stop:
@@ -305,6 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 stop.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
+
+                stopVoiceRecorder();
 
                 break;
             case R.id.right:
