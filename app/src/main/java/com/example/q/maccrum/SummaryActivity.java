@@ -1,9 +1,11 @@
 package com.example.q.maccrum;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.facebook.share.model.ShareLinkContent;
@@ -31,6 +33,10 @@ public class SummaryActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Intent intent = getIntent();
+
+
     }
 
 }

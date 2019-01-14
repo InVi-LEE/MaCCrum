@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void run() {
                                 if (isFinal) {
 //                                    String str = textView.getText().toString();
-//                                    str += null;
+//                                    str += " ";
 //                                    textView.setText(str);
                                     if(isFirst){
                                         textView.setText(text+" ");
