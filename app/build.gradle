@@ -89,6 +89,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.facebook.android:facebook-android-sdk:4.+'
+    implementation 'com.google.code.gson:gson:2.8.1'
 
     // OAuth2 for Google API
     implementation('com.google.auth:google-auth-library-oauth2-http:0.7.0') {

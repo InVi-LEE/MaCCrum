@@ -1,8 +1,12 @@
 package com.example.q.maccrum;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -14,8 +18,10 @@ import android.os.IBinder;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +44,7 @@ import com.airbnb.lottie.LottieComposition;
 //import com.vikramezhil.droidspeech.OnDSPermissionsListener;
 
 import java.lang.reflect.Array;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -247,10 +254,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
         start = findViewById(R.id.start);
         start.setOnClickListener(this);
+
         stop = findViewById(R.id.stop);
         stop.setOnClickListener(this);
         go_right = findViewById(R.id.right);
         go_right.setOnClickListener(this);
+
     }
 
     @Override
