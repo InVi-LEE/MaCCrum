@@ -45,20 +45,43 @@ public class TextViewer extends AppCompatActivity {
 
         Intent i = getIntent();
         text = (ArrayList<String>) i.getSerializableExtra("text");
+        limittext = (ArrayList<String>) i.getSerializableExtra("limittext");
+        String str = i.getStringExtra("str");
         if(text==null){
              text = new ArrayList<>();
         }
-        limittext = new ArrayList<>();
-        for(int j=0;j<text.size();j++){
-            limittext.add(text.get(j).split("\n")[0]);
+        if(limittext==null){
+            limittext = new ArrayList<>();
         }
+        if(str!=null){
+            text.add(str);
+            if(str.length()>23){
+                limittext.add(str.substring(0,23)+"...");
+            }else{
+                limittext.add(str);
+            }
+        }
+
         num = i.getIntExtra("num",0);
+        num++;
         Log.d("tag", text.toString());
         numberShow = findViewById(R.id.textView2);
         numberShow.setText("총 개수 : "+num);
 
         editView = findViewById(R.id.editview1);
         relative = findViewById(R.id.relativeview);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String string = editView.getText().toString();
+                text.set(text_position,string);
+                if(string.length()>23)
+                    limittext.set(text_position,string.substring(0,23)+"...");
+                listview.setVisibility(View.VISIBLE);
+                relative.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         listview = (ListView)findViewById(R.id.listview1);
         adapter = new ArrayAdapter<String>(
@@ -83,6 +106,7 @@ public class TextViewer extends AppCompatActivity {
                 String selected_item = (String)text.get(position);
 
                 editView.setText(selected_item);
+
                 // 10. 어댑터 객체에 변경 내용을 반영시켜줘야 에러가 발생하지 않습니다.
                 listview.setVisibility(View.GONE);
                 relative.setVisibility(View.VISIBLE);
@@ -143,12 +167,17 @@ public class TextViewer extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         text.remove(text.size()-1);
+        limittext.remove(limittext.size()-1);
+        num--;
         overridePendingTransition(R.anim.fadein_left, R.anim.fadeout_left);
     }
 }
