@@ -28,7 +28,7 @@ public class TextViewer extends AppCompatActivity {
     ArrayList<String> text;
     ArrayList<String> limittext;
     ImageButton right;
-    private ImageButton submit;
+
     Button complete;
     static int num;
     ListView listview;
@@ -38,7 +38,6 @@ public class TextViewer extends AppCompatActivity {
     RelativeLayout relative;
     static ArrayAdapter<String> adapter;
     TextView numberShow;
-    private ShareDialog shareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,23 +173,6 @@ public class TextViewer extends AppCompatActivity {
 
             }
         });
-
-        submit = (ImageButton) findViewById(R.id.ProcessButton);
-        shareDialog = new ShareDialog(this);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ShareDialog.canShow(ShareLinkContent.class)){
-                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentUrl(Uri.parse("www.google.com"))
-                            .build();
-                    shareDialog.show(linkContent);
-                }
-            }
-        });
-
-
-
 
     }
 
