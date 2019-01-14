@@ -278,6 +278,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view)
     {
+        LottieAnimationView lottie = (LottieAnimationView) findViewById(R.id.animation_view);
+
         switch (view.getId())
         {
             case R.id.start:
@@ -288,6 +290,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Setting the view visibilities when droid speech is running
                 start.setVisibility(View.GONE);
                 stop.setVisibility(View.VISIBLE);
+                lottie.setVisibility(View.VISIBLE);
+                lottie.playAnimation();
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                         == PackageManager.PERMISSION_GRANTED) {
@@ -309,6 +313,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 stop.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
+                lottie.setVisibility(View.GONE);
+                lottie.cancelAnimation();
 
                 stopVoiceRecorder();
 
