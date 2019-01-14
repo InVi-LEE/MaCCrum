@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -23,7 +26,7 @@ public class SummaryActivity extends AppCompatActivity {
     private EditText editText;
 
     ArrayList<String> text;
-    String jsonArray;
+    JSONArray jsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,14 @@ public class SummaryActivity extends AppCompatActivity {
             text = new ArrayList<>();
         }
         HttpRequest httprequest = new HttpRequest();
-        jsonArray = httprequest.execute(text).toString();
-        Log.d(">>>>>>>>>>>>",jsonArray);
+        try{
+            JSONObject jsonObject = new JSONObject(httprequest.execute(text).toString());
+            jsonArray = new JSONArray(jsonObject.get("documents").toString());
+        }catch (Exception e){
+
+        }
+        Log.d(">>>>>>>>>>>>",jsonArray.toString());
+
+
     }
 }
