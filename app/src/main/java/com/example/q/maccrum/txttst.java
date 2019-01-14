@@ -109,7 +109,8 @@ class GetKeyPhrases {
             documents.add ("3", "ko", "저는 이동연이라고 하구요 모델 어제 찾은게 너무 어려워서 새로 찾아서 그걸로 돌려봤는데 문제는 그 코드가 이제 데이터를 노멀라이즈하고 그걸 돌리더라구요 그래서 이제 제가 만들고 싶은 것은 원래값을 해서 그거를 보여주고 싶은데");
 
             String response = GetKeyPhrases (documents);
-            System.out.println (prettify (response));
+            String p_responce = prettify(response);
+
         }
         catch (Exception e) {
             System.out.println (e);
