@@ -183,14 +183,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                    str += " ";
 //                                    textView.setText(str);
                                         if(isFirst){
-                                            textView.setText(text.replace("null","")+" ");
+                                            textView.setText(text+" ");
                                             isFirst = false;
                                         }else{
                                             textView.setText(lastText + " " + text+" ");
                                         }
                                         lastText = textView.getText().toString();
                                     } else {
-                                        textView.setText(lastText + " " + text+" ");
+                                        if(lastText==null){
+                                            textView.setText(text+" ");
+                                        }else{
+                                            textView.setText(lastText + " " + text+" ");
+                                        }
                                     }
                                 }
                             }

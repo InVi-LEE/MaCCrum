@@ -56,7 +56,7 @@ public class SummaryActivity extends AppCompatActivity {
         }
         HttpRequest httprequest = new HttpRequest();
         try{
-            JSONObject jsonObject = new JSONObject(httprequest.execute(text).toString());
+            JSONObject jsonObject = new JSONObject(httprequest.execute(text).get());
             jsonArray = new JSONArray(jsonObject.get("documents").toString());
         }catch (Exception e){
 
