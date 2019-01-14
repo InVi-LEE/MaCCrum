@@ -68,4 +68,16 @@
         </FrameLayout>
     </LinearLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="224dp"
+        android:visibility="gone"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="listenloader.json"
+        app:lottie_loop="true" />
+
 </RelativeLayout>
