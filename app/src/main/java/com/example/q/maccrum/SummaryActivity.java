@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,6 +21,7 @@ public class SummaryActivity extends AppCompatActivity {
     private ImageButton submit;
 
     ArrayList<String> text;
+    String jsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class SummaryActivity extends AppCompatActivity {
             text = new ArrayList<>();
         }
         HttpRequest httprequest = new HttpRequest();
-        httprequest.execute(text);
+        jsonArray = httprequest.execute(text).toString();
+        Log.d(">>>>>>>>>>>>",jsonArray);
     }
 }

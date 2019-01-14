@@ -177,7 +177,7 @@ public class TextViewer extends AppCompatActivity {
             }
         });
 
-        submit = (ImageButton) findViewById(R.id.ProcessButton);
+        submit = (ImageButton) findViewById(R.id.processButton);
         shareDialog = new ShareDialog(this);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
