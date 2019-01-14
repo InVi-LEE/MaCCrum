@@ -29,11 +29,12 @@ public class TextViewer extends AppCompatActivity {
     ArrayList<String> text;
     ArrayList<String> limittext;
     ImageButton right;
-    ImageButton submit;
+    private ImageButton submit;
     Button complete;
     static int num;
     ListView listview;
     EditText editView;
+
     int text_position;
     RelativeLayout relative;
     static ArrayAdapter<String> adapter;

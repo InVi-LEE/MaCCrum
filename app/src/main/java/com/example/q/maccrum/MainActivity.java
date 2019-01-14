@@ -321,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mainIntent.putExtra("limittext",limittext);
                         mainIntent.putExtra("str",str);
                         mainIntent.putExtra("num", num);
+                        mainIntent.putExtra("limittext",limittext);
 
                         //SplashScreen.this.startActivity(mainIntent);
                         startActivity(mainIntent);
