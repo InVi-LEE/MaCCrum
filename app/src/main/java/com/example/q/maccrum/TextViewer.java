@@ -181,15 +181,14 @@ public class TextViewer extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Thread thread = new Thread(new Runnable(){
-                    @Override
-                    public void run(){
-                        //code to do the HTTP request
-                        GetKeyPhrases.start();
+                /* Create an intent that will start the main activity. */
+                Intent mainIntent = new Intent(TextViewer.this,
+                        SummaryActivity.class);
+                mainIntent.putExtra("text",text);
+                mainIntent.putExtra("num", num);
 
-                    }
-                });
-                thread.start();
+                //SplashScreen.this.startActivity(mainIntent);
+                startActivity(mainIntent);
                 // 공유 기능 부분.
 //                if(ShareDialog.canShow(ShareLinkContent.class)){
 //                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
