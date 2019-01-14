@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static boolean first;
     static int num;
     ArrayList<String> text;
+    ArrayList<String> limittext;
 
     static boolean isFirst;
 
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i = getIntent();
         num = i.getIntExtra("num", 0);
         text = (ArrayList<String>) i.getSerializableExtra("text");
+        limittext = (ArrayList<String>) i.getSerializableExtra("limittext");
         boolean from = i.getBooleanExtra("from", false);
         if (text == null) {
             text = new ArrayList<>();
@@ -318,6 +320,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mainIntent.putExtra("text",text);
                         mainIntent.putExtra("str",str);
                         mainIntent.putExtra("num", num);
+                        mainIntent.putExtra("limittext",limittext);
 
                         //SplashScreen.this.startActivity(mainIntent);
                         startActivity(mainIntent);

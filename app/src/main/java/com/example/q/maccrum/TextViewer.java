@@ -31,6 +31,7 @@ public class TextViewer extends AppCompatActivity {
     static int num;
     ListView listview;
     EditText editView;
+    private Button complete;
     private ImageButton submit;
     int text_position;
     RelativeLayout relative;
@@ -70,7 +71,8 @@ public class TextViewer extends AppCompatActivity {
 
         editView = findViewById(R.id.editview1);
         relative = findViewById(R.id.relativeview);
-        submit.setOnClickListener(new View.OnClickListener() {
+        complete = findViewById(R.id.button);
+        complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String string = editView.getText().toString();
@@ -137,6 +139,7 @@ public class TextViewer extends AppCompatActivity {
                                 MainActivity.class);
                         mainIntent.putExtra("text",text);
                         mainIntent.putExtra("num", num);
+                        mainIntent.putExtra("limittext",limittext);
                         mainIntent.putExtra("from",true);
 
                         //SplashScreen.this.startActivity(mainIntent);
