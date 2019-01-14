@@ -305,9 +305,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent mainIntent = new Intent(MainActivity.this,
                                 TextViewer.class);
                         Log.d(">>>>>>",textView.getText().toString());
-                        text.add(new String(textView.getText().toString()));
+                        String str = new String(textView.getText().toString());
                         mainIntent.putExtra("text",text);
-                        mainIntent.putExtra("num", num+1);
+                        mainIntent.putExtra("str",str);
+                        mainIntent.putExtra("num", num);
 
                         //SplashScreen.this.startActivity(mainIntent);
                         startActivity(mainIntent);

@@ -39,14 +39,19 @@ public class TextViewer extends AppCompatActivity {
 
         Intent i = getIntent();
         text = (ArrayList<String>) i.getSerializableExtra("text");
+        String str = i.getStringExtra("str");
         if(text==null){
              text = new ArrayList<>();
+        }
+        if(str!=null){
+            text.add(str);
         }
         limittext = new ArrayList<>();
         for(int j=0;j<text.size();j++){
             limittext.add(text.get(j).split("\n")[0]);
         }
         num = i.getIntExtra("num",0);
+        num++;
         Log.d("tag", text.toString());
         numberShow = findViewById(R.id.textView2);
         numberShow.setText("총 개수 : "+num);
@@ -154,6 +159,7 @@ public class TextViewer extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         text.remove(text.size()-1);
+        num--;
         overridePendingTransition(R.anim.fadein_left, R.anim.fadeout_left);
     }
 }
