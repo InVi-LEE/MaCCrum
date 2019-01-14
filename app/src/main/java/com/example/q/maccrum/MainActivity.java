@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<String> text;
     ArrayList<String> limittext;
 
+    LottieAnimationView lottie;
+
     static boolean isFirst;
 
     private static final String FRAGMENT_MESSAGE_DIALOG = "message_dialog";
@@ -179,9 +181,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void run() {
                                 if(text!=null){
                                     if (isFinal) {
-//                                    String str = textView.getText().toString();
-//                                    str += " ";
-//                                    textView.setText(str);
                                         if(isFirst){
                                             textView.setText(text+" ");
                                             isFirst = false;
@@ -203,16 +202,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             };
 
-//    private static class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        TextView text;
-//
-//        ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-//            super(inflater.inflate(R.layout.item_result, parent, false));
-//            text = textView
-//        }
-//
-//    }
 
 
 
@@ -222,6 +211,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //Lottie setting
+        lottie = findViewById(R.id.animation_view);
+        lottie.setSpeed(0.4f);
 
         final Resources resources = getResources();
         final Resources.Theme theme = getTheme();
@@ -240,11 +233,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
-        // Initialize Droid Speech
-//        mDroidSpeech = new DroidSpeech(this, null);
-//        mDroidSpeech.setOnDroidSpeechListener(this);
-//        mDroidSpeech.setShowRecognitionProgressView(true);
-
         if (Build.VERSION.SDK_INT >= 23) {
             // 퍼미션 체크
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET,
@@ -253,11 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textView = (TextView) findViewById(R.id.sttResult);
 
-//        intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-//        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
-//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
-//        intent.putExtra("android.speech.extra.DICTATION_MODE", true);
-//        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
         start = findViewById(R.id.start);
         start.setOnClickListener(this);
 
@@ -274,7 +257,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Prepare Cloud Speech API
         bindService(new Intent(this, SpeechService.class), mServiceConnection, BIND_AUTO_CREATE);
-//        isFirst = true;
+
+
 
 
     }
@@ -282,14 +266,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view)
     {
-        LottieAnimationView lottie = (LottieAnimationView) findViewById(R.id.animation_view);
+
 
         switch (view.getId())
         {
             case R.id.start:
-
-                // Starting droid speech
-//                mDroidSpeech.startDroidSpeechRecognition();
 
                 // Setting the view visibilities when droid speech is running
                 start.setVisibility(View.GONE);
@@ -312,8 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.stop:
 
-                // Closing droid speech
-//                mDroidSpeech.closeDroidSpeechOperations();
 
                 stop.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
@@ -342,7 +321,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //SplashScreen.this.startActivity(mainIntent);
                         startActivity(mainIntent);
                         /* Finish splash activity so user cant go back to it. */
-//                        MainActivity.this.finish();
 //
 //                     /* Apply our splash exit (fade out) and main
 //                        entry (fade in) animation transitions. */
@@ -396,127 +374,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             stop.performClick();
         }
     }
-    // MARK: OnClickListener Method
-
-
-
-    // MARK: DroidSpeechListener Methods
-
-//    @Override
-//    public void onDroidSpeechSupportedLanguages(String currentSpeechLanguage, List<String> supportedSpeechLanguages)
-//    {
-//        Log.i(TAG, "Current speech language = " + currentSpeechLanguage);
-////        Log.i(TAG, "Supported speech languages = " + supportedSpeechLanguages.toString());
-//
-//        if(supportedSpeechLanguages.contains("ko-KR"))
-//        {
-//            // Setting the droid speech preferred language as tamil if found
-//            mDroidSpeech.setPreferredLanguage("ko-KR");
-//
-//            // Setting the confirm and retry text in tamil
-//            mDroidSpeech.setOneStepVerifyConfirmText("시작되었습니다.");
-//            mDroidSpeech.setOneStepVerifyRetryText("시작되었습니다.");
-//        }
-//    }
-//
-//    @Override
-//    public void onDroidSpeechRmsChanged(float rmsChangedValue)
-//    {
-//        // Log.i(TAG, "Rms change value = " + rmsChangedValue);
-//    }
-//
-//    @Override
-//    public void onDroidSpeechLiveResult(String liveSpeechResult)
-//    {
-//        Log.i(TAG, "Live speech result = " + liveSpeechResult);
-//    }
-//
-//    @Override
-//    public void onDroidSpeechFinalResult(String finalSpeechResult)
-//    {
-//        // Setting the final speech result
-//        if(first){
-//            this.textView.setText(finalSpeechResult + "\n");
-//            first = false;
-//        }else{
-//            this.textView.append(finalSpeechResult+"\n");
-//        }
-//
-//        if(mDroidSpeech.getContinuousSpeechRecognition())
-//        {
-//            int[] colorPallets1 = new int[] {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA};
-//            int[] colorPallets2 = new int[] {Color.YELLOW, Color.RED, Color.CYAN, Color.BLUE, Color.GREEN};
-//
-//            // Setting random color pallets to the recognition progress view
-//            mDroidSpeech.setRecognitionProgressViewColors(new Random().nextInt(2) == 0 ? colorPallets1 : colorPallets2);
-//        }
-//        else
-//        {
-//            stop.setVisibility(View.GONE);
-//            start.setVisibility(View.VISIBLE);
-//        }
-//    }
-//
-//    @Override
-//    public void onDroidSpeechClosedByUser()
-//    {
-//        stop.setVisibility(View.GONE);
-//        start.setVisibility(View.VISIBLE);
-//    }
-//
-//    @Override
-//    public void onDroidSpeechError(String errorMsg)
-//    {
-//        // Speech error
-//        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
-//
-//        stop.post(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                // Stop listening
-//                stop.performClick();
-//            }
-//        });
-//    }
-//
-//    // MARK: DroidSpeechPermissionsListener Method
-//
-//    @Override
-//    public void onDroidSpeechAudioPermissionStatus(boolean audioPermissionGiven, String errorMsgIfAny)
-//    {
-//        if(audioPermissionGiven)
-//        {
-//            start.post(new Runnable()
-//            {
-//                @Override
-//                public void run()
-//                {
-//                    // Start listening
-//                    start.performClick();
-//                }
-//            });
-//        }
-//        else
-//        {
-//            if(errorMsgIfAny != null)
-//            {
-//                // Permissions error
-//                Toast.makeText(this, errorMsgIfAny, Toast.LENGTH_LONG).show();
-//            }
-//
-//            stop.post(new Runnable()
-//            {
-//                @Override
-//                public void run()
-//                {
-//                    // Stop listening
-//                    stop.performClick();
-//                }
-//            });
-//        }
-//    }
-
 }
 

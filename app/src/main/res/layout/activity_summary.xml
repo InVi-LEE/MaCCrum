@@ -9,8 +9,9 @@
     android:background="@drawable/bg_gradient">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageButton
             android:id="@+id/ProcessButton"
             android:layout_width="35dp"
@@ -23,6 +24,19 @@
             tools:layout_editor_absoluteX="121dp"
             tools:layout_editor_absoluteY="481dp" />
 
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ProcessButton"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="-35dp"
+            android:layout_marginRight="20dp"
+            android:layout_toStartOf="@+id/processButton"
+            android:textColor="@color/white" />
+
+
     </RelativeLayout>
 
-    </LinearLayout>
+</LinearLayout>

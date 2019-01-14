@@ -140,10 +140,11 @@ public class TextViewer extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 text.remove(position);
+                limittext.remove(position);
                 num--;
                 adapter.notifyDataSetChanged();
                 numberShow.setText("총 개수 : "+num);
-                return false;
+                return true;
             }
         });
 

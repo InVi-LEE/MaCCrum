@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -27,6 +28,8 @@ public class SummaryActivity extends AppCompatActivity {
 
     ArrayList<String> text;
     JSONArray jsonArray;
+
+    TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,25 @@ public class SummaryActivity extends AppCompatActivity {
         }catch (Exception e){
 
         }
+        textview = findViewById(R.id.edit_text);
         Log.d(">>>>>>>>>>>>",jsonArray.toString());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String text = new String();
+        try{
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject json = new JSONObject(jsonArray.get(i).toString());
+                JSONArray keyphrase = new JSONArray(json.get("keyPharases").toString());
+                for(int j=0;j<keyphrase.length();j++){
 
+                }
+            }
+        }catch(Exception e){
+
+        }
+        textview.setText(text);
     }
 }
