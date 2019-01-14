@@ -318,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(">>>>>>",textView.getText().toString());
                         String str = new String(textView.getText().toString());
                         mainIntent.putExtra("text",text);
+                        mainIntent.putExtra("limittext",limittext);
                         mainIntent.putExtra("str",str);
                         mainIntent.putExtra("num", num);
                         mainIntent.putExtra("limittext",limittext);

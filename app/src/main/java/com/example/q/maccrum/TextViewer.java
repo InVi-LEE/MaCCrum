@@ -27,12 +27,12 @@ public class TextViewer extends AppCompatActivity {
     ArrayList<String> text;
     ArrayList<String> limittext;
     ImageButton right;
-    ImageButton process;
+    private ImageButton submit;
+    Button complete;
     static int num;
     ListView listview;
     EditText editView;
-    private Button complete;
-    private ImageButton submit;
+
     int text_position;
     RelativeLayout relative;
     static ArrayAdapter<String> adapter;
@@ -79,6 +79,8 @@ public class TextViewer extends AppCompatActivity {
                 text.set(text_position,string);
                 if(string.length()>23)
                     limittext.set(text_position,string.substring(0,23)+"...");
+                else
+                    limittext.set(text_position,string);
                 listview.setVisibility(View.VISIBLE);
                 relative.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
@@ -112,6 +114,7 @@ public class TextViewer extends AppCompatActivity {
                 // 10. 어댑터 객체에 변경 내용을 반영시켜줘야 에러가 발생하지 않습니다.
                 listview.setVisibility(View.GONE);
                 relative.setVisibility(View.VISIBLE);
+                text_position = position;
             }
         });
 
