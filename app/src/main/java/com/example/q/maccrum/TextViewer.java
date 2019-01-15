@@ -29,7 +29,7 @@ public class TextViewer extends AppCompatActivity {
     ArrayList<String> text;
     ArrayList<String> limittext;
     ImageButton right;
-    private ImageButton submit;
+    private Button submit;
     Button complete;
     static int num;
     ListView listview;
@@ -70,7 +70,7 @@ public class TextViewer extends AppCompatActivity {
         num++;
         Log.d("tag", text.toString());
         numberShow = findViewById(R.id.textView2);
-        numberShow.setText("총 개수 : "+num);
+        numberShow.setText("참가자 : "+ num + " 명");
 
         editView = findViewById(R.id.editview1);
         relative = findViewById(R.id.relativeview);
@@ -143,7 +143,7 @@ public class TextViewer extends AppCompatActivity {
                 limittext.remove(position);
                 num--;
                 adapter.notifyDataSetChanged();
-                numberShow.setText("총 개수 : "+num);
+                numberShow.setText("참가자 : "+ num + " 명");
                 return true;
             }
         });
@@ -178,7 +178,7 @@ public class TextViewer extends AppCompatActivity {
             }
         });
 
-        submit = (ImageButton) findViewById(R.id.processButton);
+        submit = (Button) findViewById(R.id.processButton);
         shareDialog = new ShareDialog(this);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

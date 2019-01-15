@@ -1,5 +1,7 @@
 package com.example.q.maccrum;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.content.Intent;
@@ -7,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -29,6 +33,7 @@ public class SummaryActivity extends AppCompatActivity {
     private ShareDialog shareDialog;
     private ImageButton submit;
     private EditText editText;
+    private Button copy;
 
     ArrayList<String> text;
     JSONArray jsonArray;
@@ -53,6 +58,22 @@ public class SummaryActivity extends AppCompatActivity {
                             .build();
                     shareDialog.show(linkContent);
                 }
+            }
+        });
+
+        copy = (Button)findViewById(R.id.copy);
+        copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    EditText editText = (EditText)findViewById(R.id.edit_text);
+                    String k = editText.getText().toString();
+                    //클립보드 사용 코드
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("ID",k);
+                    clipboardManager.setPrimaryClip(clipData);
+
+                    //복사가 되었다면 토스트메시지 노출
+                    Toast.makeText(getApplicationContext(),"요약문이 복사되었습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +124,7 @@ public class SummaryActivity extends AppCompatActivity {
                     boolean exist = false;
                     for(int k=0;k<nameList.size();k++){
                         if(keyphrase.get(j).toString().contains(nameList.get(k))){
-                            onesummary.add(0,nameList.get(k) + " - \n");
+                            onesummary.add(0,nameList.get(k) + " - ");
                             exist = true;
                             break;
                         }
@@ -115,7 +136,6 @@ public class SummaryActivity extends AppCompatActivity {
                 for(int j=0;j<onesummary.size();j++){
                     text += onesummary.get(j);
                 }
-                text += "\n";
             }
         }catch(Exception e){
 

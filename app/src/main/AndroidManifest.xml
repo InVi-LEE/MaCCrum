@@ -40,7 +40,11 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".SummaryActivity"></activity>
+        <activity android:name=".SummaryActivity" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/rounded" />
     </application>
 
 </manifest>
