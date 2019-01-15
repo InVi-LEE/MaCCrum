@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SummaryActivity extends AppCompatActivity {
     private ShareDialog shareDialog;
@@ -32,6 +34,8 @@ public class SummaryActivity extends AppCompatActivity {
     JSONArray jsonArray;
 
     TextView textview;
+
+    ArrayList<String> nameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class SummaryActivity extends AppCompatActivity {
         }
         textview = findViewById(R.id.edit_text);
         Log.d(">>>>>>>>>>>>",jsonArray.toString());
+
+        nameList = new ArrayList<>();
     }
 
     @Override
@@ -77,17 +83,39 @@ public class SummaryActivity extends AppCompatActivity {
         try{
             JSONObject people = new JSONObject(readJSONFromAsset());
             JSONArray name = people.getJSONArray("class");
-            Log.d(">>>>>>>>>>>>>>>>>person name asset",people.toString());
+            for(int i=0;i<name.length();i++){
+                JSONArray names = name.getJSONObject(i).getJSONArray("name");
+                for(int j=0;j<names.length();j++){
+                    nameList.add(names.getString(j));
+                }
+
+            }
+            Log.d(">>>>>>>>>>>>>nameList" , nameList.toString());
             for(int i=0;i<jsonArray.length();i++){
+                Log.d(">>>>>>>>>","1");
                 JSONObject json = new JSONObject(jsonArray.get(i).toString());
-                JSONArray keyphrase = new JSONArray(json.get("keyPharases").toString());
-                Log.d(">>>>>>>number", String.valueOf(keyphrase.length()));
+                Log.d(">>>>>>>>>",json.toString());
+                JSONArray keyphrase = new JSONArray(json.get("keyPhrases").toString());
+                Log.d(">>>>>>>>>","3");
+                ArrayList<String> onesummary = new ArrayList<>();
+
                 for(int j=0;j<keyphrase.length();j++){
-                    Log.d(">>>>>>>>>>>>>>>>>>>>>>>. keyphrase",keyphrase.get(j).toString());
-                    if(keyphrase.get(j).toString().contains("이동민")){
-                        text += "이동민-";
+                    boolean exist = false;
+                    for(int k=0;k<nameList.size();k++){
+                        if(keyphrase.get(j).toString().contains(nameList.get(k))){
+                            onesummary.add(0,nameList.get(k) + " - \n");
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if(exist==false){
+                        onesummary.add(keyphrase.get(j).toString()+"\n");
                     }
                 }
+                for(int j=0;j<onesummary.size();j++){
+                    text += onesummary.get(j);
+                }
+                text += "\n";
             }
         }catch(Exception e){
 
