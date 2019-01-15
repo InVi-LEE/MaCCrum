@@ -7,6 +7,12 @@
     android:background="@drawable/bg_gradient">
 
 
+    <ImageView
+        android:layout_width="244dp"
+        android:layout_height="370dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
         android:layout_width="wrap_content"
