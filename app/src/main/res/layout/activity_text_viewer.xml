@@ -40,19 +40,19 @@
 
     <ImageButton
         android:id="@+id/processButton"
-        android:layout_width="35dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="5dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="fitXY"
         android:scaleX="-1"
-        app:srcCompat="@drawable/ico_process" />
+        app:srcCompat="@drawable/summerize" />
 
     <ImageButton
         android:id="@+id/right"
@@ -71,20 +71,20 @@
 
     <RelativeLayout
         android:id="@+id/relativeview"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="489dp"
+        android:layout_height="200dp"
         android:layout_below="@+id/right"
         android:layout_alignParentStart="true"
         android:layout_marginTop="-259dp"
-        android:background="@color/gray">
+        android:background="#00000000"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/editview1"
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/white"/>
+            android:layout_margin="20dp"
+            android:background="#80ffffff" />
 
         <Button
             android:id="@+id/button"
@@ -94,7 +94,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="31dp"
             android:layout_marginBottom="21dp"
+            android:gravity="center"
             android:text="완료" />
+
+
     </RelativeLayout>
 
 </RelativeLayout>
