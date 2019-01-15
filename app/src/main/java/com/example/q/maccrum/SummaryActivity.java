@@ -18,6 +18,8 @@ import com.facebook.share.widget.ShareDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -73,16 +75,39 @@ public class SummaryActivity extends AppCompatActivity {
         super.onResume();
         String text = new String();
         try{
+            JSONObject people = new JSONObject(readJSONFromAsset());
+            JSONArray name = people.getJSONArray("class");
+            Log.d(">>>>>>>>>>>>>>>>>person name asset",people.toString());
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject json = new JSONObject(jsonArray.get(i).toString());
                 JSONArray keyphrase = new JSONArray(json.get("keyPharases").toString());
+                Log.d(">>>>>>>number", String.valueOf(keyphrase.length()));
                 for(int j=0;j<keyphrase.length();j++){
-
+                    Log.d(">>>>>>>>>>>>>>>>>>>>>>>. keyphrase",keyphrase.get(j).toString());
+                    if(keyphrase.get(j).toString().contains("이동민")){
+                        text += "이동민-";
+                    }
                 }
             }
         }catch(Exception e){
 
         }
         textview.setText(text);
+    }
+
+    public String readJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("name.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }
